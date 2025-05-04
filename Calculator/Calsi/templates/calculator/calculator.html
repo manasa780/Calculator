@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f4f4;
+            height: 100vh;
+        }
+        .calculator {
+            max-width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        #result {
+            height: 50px;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .btn {
+            font-size: 18px;
+            padding: 15px 0;
+        }
+        .btn.operator {
+            background-color: #f9a825;
+            color: white;
+        }
+        .btn.equal {
+            background-color: #4caf50;
+            color: white;
+        }
+        .btn.clear {
+            background-color: #f44336;
+            color: white;
+        }
+        .btn.back {
+            background-color: #03a9f4;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="calculator">
+    <input type="text" id="result" class="form-control mb-3" readonly>
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-3"><button onclick="clearResult()" class="btn clear w-100">C</button></div>
+            <div class="col-3"><button onclick="backspace()" class="btn back w-100">⌫</button></div>
+            <div class="col-3"><button onclick="appendValue('%')" class="btn btn-secondary w-100">%</button></div>
+            <div class="col-3"><button onclick="appendValue('/')" class="btn operator w-100">/</button></div>
+
+            <div class="col-3"><button onclick="appendValue('7')" class="btn btn-light w-100">7</button></div>
+            <div class="col-3"><button onclick="appendValue('8')" class="btn btn-light w-100">8</button></div>
+            <div class="col-3"><button onclick="appendValue('9')" class="btn btn-light w-100">9</button></div>
+            <div class="col-3"><button onclick="appendValue('*')" class="btn operator w-100">*</button></div>
+
+            <div class="col-3"><button onclick="appendValue('4')" class="btn btn-light w-100">4</button></div>
+            <div class="col-3"><button onclick="appendValue('5')" class="btn btn-light w-100">5</button></div>
+            <div class="col-3"><button onclick="appendValue('6')" class="btn btn-light w-100">6</button></div>
+            <div class="col-3"><button onclick="appendValue('-')" class="btn operator w-100">-</button></div>
+
+            <div class="col-3"><button onclick="appendValue('1')" class="btn btn-light w-100">1</button></div>
+            <div class="col-3"><button onclick="appendValue('2')" class="btn btn-light w-100">2</button></div>
+            <div class="col-3"><button onclick="appendValue('3')" class="btn btn-light w-100">3</button></div>
+            <div class="col-3"><button onclick="appendValue('+')" class="btn operator w-100">+</button></div>
+
+            <div class="col-3"><button onclick="appendValue('0')" class="btn btn-light w-100">0</button></div>
+            <div class="col-3"><button onclick="appendValue('.')" class="btn btn-light w-100">.</button></div>
+            <div class="col-6"><button onclick="calculate()" class="btn equal w-100">=</button></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function appendValue(value) {
+        const result = document.getElementById('result');
+        if (value === '%') {
+            try {
+                result.value = eval(result.value) / 100;
+            } catch (e) {
+                alert('Invalid expression');
+            }
+        } else {
+            result.value += value;
+        }
+    }
+
+    function clearResult() {
+        document.getElementById('result').value = '';
+    }
+
+    function backspace() {
+        const result = document.getElementById('result');
+        result.value = result.value.slice(0, -1);
+    }
+
+    function calculate() {
+        try {
+            document.getElementById('result').value = eval(document.getElementById('result').value);
+        } catch (e) {
+            alert('Invalid expression');
+        }
+    }
+</script>
+</body>
+</html>
